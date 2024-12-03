@@ -39,18 +39,31 @@ def inputAddFlavor():
     addFlavor(flavorName, flavorDesc)
     print(f"Flavor: {flavorName} , added successfully.")
 
+
+def inputUpdateFlavor():
+    oldFlavorName = input("Enter flavor you wish to update: ")
+    newFlavorName = input("Enter new flavor name: ")
+    newDesc = input("Enter new flavor description: ")
+
+    if updateFlavor(oldFlavorName, newFlavorName, newDesc):
+        print(f"Flavor: {oldFlavorName} , updated successfully.")
+    else:
+        print("Flavor not updated successfully.")
+
 while True:
-    inputAddFlavor()
-    addedFlavor = input("Would you like to add another flavor? (y/n): ")
-    if addedFlavor != 'y':
+    userChoice = input("Do you wish to add or update a flavor? (add/update/quit)\n")
+    if userChoice == 'add':
+        inputAddFlavor()
+        addedFlavor = input("Would you like to continue? (y/n): ")
+        if addedFlavor == 'y':
+            continue #starts loop from the top
+    elif userChoice == 'update':
+        print(f"Flavors: {displayFlavors()}")
+        inputUpdateFlavor()
+    elif userChoice == 'quit':
         break
-
-
-
-#if updateFlavor('Chocolate Fudge', 'Mint Chocolate', 'Minty with chocolate chips'):
-#    print("Flavor updated!")
-#else:
-#    print("Flavor not updated!")
+    else:
+        print("Invalid choice.")
 
 
 displayFlavors()
