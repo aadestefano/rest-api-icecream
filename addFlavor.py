@@ -21,7 +21,16 @@ def updateFlavor(oldFlavor, newFlavor, newDesc):
             flavor['name'] = newFlavor
             flavor['description'] = newDesc
             return True #checks if update went through
-        return False #when flavor is not found
+    return False #when flavor is not found
+
+#delete function for removing flavor from list
+def delFlavor(flavorName):
+    for flavor in iceCreamFlavors:
+        if flavor['name'] == flavorName:
+            iceCreamFlavors.remove(flavor)
+            return True
+    return False
+
 
 def displayFlavors():
     #display the flavors in the list
@@ -50,8 +59,18 @@ def inputUpdateFlavor():
     else:
         print("Flavor not updated successfully.")
 
+
+def inputDelFlavor():
+    flavorName = input("Enter the flavor you wish to delete: ")
+    if delFlavor(flavorName):
+        print(f"Flavor: {flavorName} successfully deleted.")
+    else:
+        print(f"Flavor: {flavorName} not found.")
+
+
+
 while True:
-    userChoice = input("Do you wish to add or update a flavor? (add/update/quit)\n")
+    userChoice = input("Do you wish to add, update, or delete a flavor? (add/update/delete/quit)\n")
     if userChoice == 'add':
         inputAddFlavor()
         addedFlavor = input("Would you like to continue? (y/n): ")
@@ -60,6 +79,9 @@ while True:
     elif userChoice == 'update':
         print(f"Flavors: {displayFlavors()}")
         inputUpdateFlavor()
+    elif userChoice == 'delete':
+        displayFlavors()
+        inputDelFlavor()
     elif userChoice == 'quit':
         break
     else:
